@@ -3,7 +3,7 @@ name: run (work)
 on:
   schedule:
     # Runs at every 5-minute interval (cron syntax)
-    - cron: '*/60 * * * *'
+    - cron: '*/1440 * * * *'
   workflow_dispatch:  # Allows manual trigger
 
 jobs:
