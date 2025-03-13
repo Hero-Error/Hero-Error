@@ -13,7 +13,7 @@ driver = webdriver.Chrome(options=options)
 driver.get("https://nyf4tr-8080.csb.app/auth/login")  # Replace with your actual URL
 
 # Number of times to reload the page
-reload_count = 128  
+reload_count = 10000  
 
 for _ in range(reload_count):
     try:
