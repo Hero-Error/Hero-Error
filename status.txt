@@ -1,0 +1,1 @@
+cron: '* * * * *'  # Runs every minute
