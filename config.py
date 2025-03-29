@@ -25,7 +25,7 @@ for _ in range(reload_count):
         print(f"Button not found, skipping click. Error: {e}")
 
     # Wait for 3 minutes before refreshing
-    time.sleep(‭‭120)
+    time.sleep(60)
 
     # Refresh the webpage
     driver.refresh()
