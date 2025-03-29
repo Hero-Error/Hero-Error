@@ -10,10 +10,10 @@ options.add_argument("--headless")  # Run in headless mode (no GUI)
 driver = webdriver.Chrome(options=options)
 
 # Open the page
-driver.get("https://nyf4tr-8080.csb.app/auth/login")  # Replace with your actual URL
+driver.get("https://2pn7dw-8080.csb.app/auth/login")  # Replace with your actual URL
 
 # Number of times to reload the page
-reload_count = 1000000  
+reload_count = 100000
 
 for _ in range(reload_count):
     try:
