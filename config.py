@@ -6,11 +6,11 @@ import time
 email = "afk@Bot.com"
 password = "Error-0.1"
 
-# Set up the Chrome WebDriver options
+# Set up Chrome WebDriver options
 options = webdriver.ChromeOptions()
-options.add_argument("--headless")  # Run in headless mode (no GUI)
-options.add_argument('--no-sandbox')
-options.add_argument('--disable-dev-shm-usage')
+options.add_argument("--headless")
+options.add_argument("--no-sandbox")
+options.add_argument("--disable-dev-shm-usage")
 
 # Initialize the WebDriver
 driver = webdriver.Chrome(options=options)
@@ -19,7 +19,7 @@ try:
     # Go to login page
     driver.get("https://cm8lcm-3001.csb.app/login")
 
-    # Click "Yes, proceed to preview" if the button exists
+    # Optional: Click "Yes, proceed to preview" button
     try:
         button = driver.find_element(By.XPATH, '//button[contains(text(), "Yes, proceed to preview")]')
         button.click()
@@ -27,18 +27,24 @@ try:
     except Exception as e:
         print("Preview button not found or already skipped.")
 
-    # Wait for login form to load
     time.sleep(2)
 
-    # Fill email and password (make sure these names are correct)
-    driver.find_element(By.NAME, "Username").send_keys(email)
-    driver.find_element(By.NAME, "Password").send_keys(password)
+    # Find all input fields
+    input_fields = driver.find_elements(By.TAG_NAME, "input")
+
+    # Fill in email and password
+    if len(input_fields) >= 2:
+        input_fields[0].send_keys(email)
+        input_fields[1].send_keys(password)
+        print("Filled in email and password.")
+    else:
+        raise Exception("Unable to find email and password input fields.")
 
     # Click the "Sign in" button
-    driver.find_element(By.XPATH, '//button[contains(text(), "Sign in")]').click()
-    print("Login form submitted.")
+    sign_in_button = driver.find_element(By.XPATH, '//button[contains(text(), "Sign in")]')
+    sign_in_button.click()
+    print("Clicked Sign in button.")
 
-    # Wait for login to complete
     time.sleep(5)
 
     # Go to AFK page
@@ -46,8 +52,7 @@ try:
     print("Navigated to AFK page.")
 
     # Stay AFK
-    afk_duration_minutes = 120
-    for i in range(afk_duration_minutes):
+    for i in range(120):
         print(f"AFK for minute {i + 1}")
         time.sleep(60)
 
