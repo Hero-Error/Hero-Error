@@ -17,7 +17,7 @@ driver = webdriver.Chrome(options=options)
 
 try:
     # Go to login page
-    driver.get("https://cm8lcm-3001.csb.app")
+    driver.get("https://cm8lcm-3001.csb.app/login")
 
     # Click "Yes, proceed to preview" if the button exists
     try:
@@ -31,8 +31,8 @@ try:
     time.sleep(2)
 
     # Fill email and password
-    driver.find_element(By.NAME, "username").send_keys(email)
-    driver.find_element(By.NAME, "password").send_keys(password)
+    driver.find_element(By.NAME, "Username").send_keys(email)
+    driver.find_element(By.NAME, "Password").send_keys(password)
 
     # Submit the form
     driver.find_element(By.XPATH, '//button[contains(text(), "Login")]').click()
