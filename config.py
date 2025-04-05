@@ -3,7 +3,7 @@ from selenium.webdriver.common.by import By
 import time
 
 # Credentials
-email = "Error-Islam@Jell-o.com"
+email = "afk@Bot.com"
 password = "Error-0.1"
 
 # Set up the Chrome WebDriver options
@@ -31,7 +31,7 @@ try:
     time.sleep(2)
 
     # Fill email and password
-    driver.find_element(By.NAME, "email").send_keys(email)
+    driver.find_element(By.NAME, "username").send_keys(email)
     driver.find_element(By.NAME, "password").send_keys(password)
 
     # Submit the form
