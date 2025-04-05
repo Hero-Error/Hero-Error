@@ -37,4 +37,26 @@ try:
     # Fill in email and password
     inputs[0].send_keys(email)
     inputs[1].send_keys(password)
-    print
+    print("Filled email and password.")
+
+    # Click the "Sign in" button
+    sign_in_button = wait.until(EC.element_to_be_clickable((By.XPATH, '//button[contains(text(), "Sign in")]')))
+    sign_in_button.click()
+    print("Clicked Sign in.")
+
+    # Wait for AFK page to load
+    time.sleep(5)
+    driver.get("https://cm8lcm-3001.csb.app/afk")
+    print("AFK page loaded.")
+
+    # Stay AFK
+    for i in range(120):
+        print(f"AFK minute {i + 1}")
+        time.sleep(60)
+
+except Exception as e:
+    print(f"Error: {e}")
+
+finally:
+    print("Ending session.")
+    driver.quit()
