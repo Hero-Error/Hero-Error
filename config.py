@@ -30,12 +30,12 @@ try:
     # Wait for login form to load
     time.sleep(2)
 
-    # Fill email and password
+    # Fill email and password (make sure these names are correct)
     driver.find_element(By.NAME, "Username").send_keys(email)
     driver.find_element(By.NAME, "Password").send_keys(password)
 
-    # Submit the form
-    driver.find_element(By.XPATH, '//button[contains(text(), "Login")]').click()
+    # Click the "Sign in" button
+    driver.find_element(By.XPATH, '//button[contains(text(), "Sign in")]').click()
     print("Login form submitted.")
 
     # Wait for login to complete
