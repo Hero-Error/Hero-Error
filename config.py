@@ -2,35 +2,58 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 import time
 
+# Credentials
+email = "Error-Islam@Jell-o.com"
+password = "Error-0.1"
+
 # Set up the Chrome WebDriver options
 options = webdriver.ChromeOptions()
 options.add_argument("--headless")  # Run in headless mode (no GUI)
+options.add_argument('--no-sandbox')
+options.add_argument('--disable-dev-shm-usage')
 
 # Initialize the WebDriver
 driver = webdriver.Chrome(options=options)
 
-# Open the page
-driver.get("https://2pn7dw-8080.csb.app/auth/login")  # Replace with your actual URL
+try:
+    # Go to login page
+    driver.get("https://cm8lcm-3001.csb.app")
 
-# Number of times to reload the page
-reload_count = 100000
-
-for _ in range(reload_count):
+    # Click "Yes, proceed to preview" if the button exists
     try:
-        # Try to find and click the button
         button = driver.find_element(By.XPATH, '//button[contains(text(), "Yes, proceed to preview")]')
         button.click()
-        print("Button clicked successfully!")
+        print("Clicked preview button.")
     except Exception as e:
-        print(f"Button not found, skipping click. Error: {e}")
+        print("Preview button not found or already skipped.")
 
-    # Wait for 3 minutes before refreshing
-    time.sleep(3600)
+    # Wait for login form to load
+    time.sleep(2)
 
-    # Refresh the webpage
-    driver.refresh()
-    print("Webpage reloaded!")
+    # Fill email and password
+    driver.find_element(By.NAME, "email").send_keys(email)
+    driver.find_element(By.NAME, "password").send_keys(password)
 
-# Quit the browser after 3 reloads
-print("Task completed. Closing the browser.")
-driver.quit()
+    # Submit the form
+    driver.find_element(By.XPATH, '//button[contains(text(), "Login")]').click()
+    print("Login form submitted.")
+
+    # Wait for login to complete
+    time.sleep(5)
+
+    # Go to AFK page
+    driver.get("https://cm8lcm-3001.csb.app/afk")
+    print("Navigated to AFK page.")
+
+    # Stay AFK
+    afk_duration_minutes = 9999
+    for i in range(afk_duration_minutes):
+        print(f"AFK for minute {i + 1}")
+        time.sleep(60)
+
+except Exception as e:
+    print(f"An error occurred: {e}")
+
+finally:
+    print("Ending session.")
+    driver.quit()
