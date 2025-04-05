@@ -10,3 +10,4 @@
 Hero-Error/Hero-Error is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 You can click the Preview link to take a look at your changes.
 --->
+[![run (work)](https://github.com/Hero-Error/Hero-Error/actions/workflows/up-time.yml/badge.svg?event=workflow_run)](https://github.com/Hero-Error/Hero-Error/actions/workflows/up-time.yml)
