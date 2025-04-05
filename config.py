@@ -46,7 +46,7 @@ try:
     print("Navigated to AFK page.")
 
     # Stay AFK
-    afk_duration_minutes = 9999
+    afk_duration_minutes = 120
     for i in range(afk_duration_minutes):
         print(f"AFK for minute {i + 1}")
         time.sleep(60)
