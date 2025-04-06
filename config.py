@@ -1,57 +1,36 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 import time
 
-# Credentials
-email = "afk@Bot.com"
-password = "Error-0.1"
-
-# Set up Chrome WebDriver options
+# Set up the Chrome WebDriver options
 options = webdriver.ChromeOptions()
-options.add_argument("--headless")
-options.add_argument("--no-sandbox")
-options.add_argument("--disable-dev-shm-usage")
+options.add_argument("--headless")  # Run in headless mode (no GUI)
 
+# Initialize the WebDriver
 driver = webdriver.Chrome(options=options)
-wait = WebDriverWait(driver, 15)
 
-try:
-    driver.get("https://cm8lcm-3001.csb.app/login")
+# Open the page
+driver.get("https://h9w6nh-25002.csb.app")  # Replace with your actual URL
 
-    # Optional preview gate
+# Number of times to reload the page
+reload_count = 9999
+
+for _ in range(reload_count):
     try:
-        preview_button = wait.until(EC.element_to_be_clickable((By.XPATH, '//button[contains(text(), "Yes, proceed to preview")]')))
-        preview_button.click()
-        print("Clicked preview button.")
-    except:
-        print("Preview button not found or skipped.")
+        # Try to find and click the button
+        button = driver.find_element(By.XPATH, '//button[contains(text(), "Yes, proceed to preview")]')
+        button.click()
+        print("Button clicked successfully!")
+    except Exception as e:
+        print(f"Button not found, skipping click. Error: {e}")
 
-    # Wait for email field and fill it
-    wait.until(EC.presence_of_element_located((By.NAME, "email"))).send_keys(email)
-    driver.find_element(By.NAME, "password").send_keys(password)
-    print("Email and password entered.")
+    # Wait for 3 minutes before refreshing
+    time.sleep(180)
 
-    # Click "Sign in"
-    wait.until(EC.element_to_be_clickable((By.XPATH, '//button[contains(text(), "Sign in")]'))).click()
-    print("Clicked Sign in.")
+    # Refresh the webpage
+    driver.refresh()
+    print("Webpage reloaded!")
 
-    # Wait for login to complete
-    time.sleep(5)
-
-    # Go to AFK page
-    driver.get("https://cm8lcm-3001.csb.app/afk")
-    print("AFK page loaded.")
-
-    # Stay AFK
-    for i in range(120):
-        print(f"AFK minute {i + 1}")
-        time.sleep(60)
-
-except Exception as e:
-    print(f"Error occurred: {e}")
-
-finally:
-    print("Ending session.")
-    driver.quit()
+# Quit the browser after 3 reloads
+print("Task completed. Closing the browser.")
+driver.quit()
